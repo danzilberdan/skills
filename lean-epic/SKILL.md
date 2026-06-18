@@ -27,17 +27,24 @@ Default to `.lean/<epic-slug>/` unless the user gives another path.
 
 Keep progress out of the north star. Put progress in `state.md` and iteration files.
 
+## Epic Selection
+
+Never assume which lean epic the user means. If the user does not explicitly give the epic path, epic slug, or a node-specific instruction that uniquely identifies the epic, validate the target before reading or writing epic docs.
+
+Validation means inspect available candidates, tell the user which epic you think they mean, and get confirmation before proceeding. Do not choose an epic based only on recency, current branch, folder names, or there being a single obvious-looking `.lean/<epic-slug>/` folder.
+
 ## Startup
 
-1. Read existing lean epic files and relevant project context before asking questions.
-2. Use `probe-me` when the product outcome, architecture, success criteria, non-goals, or next slice is unclear.
-3. Choose the workflow mode:
+1. Validate the target epic unless the user explicitly gave it.
+2. Read existing lean epic files and relevant project context before asking questions.
+3. Use `probe-me` when the product outcome, architecture, success criteria, non-goals, or next slice is unclear.
+4. Choose the workflow mode:
    - **Bootstrap:** create missing `north-star.md` or `state.md`.
    - **Refine North Star:** update durable goals or decisions.
    - **Plan Next Iteration:** write the next `iteration-N.md`.
    - **Implement Active Iteration:** execute the iteration named in `state.md`.
    - **Validate And Close:** verify, update state, commit, and push.
-4. Tell the user the selected mode and why.
+5. Tell the user the selected mode and why.
 
 Ask only for high-leverage decisions, implementation approval, or costly/risky work. Do not ask questions answerable from the repo or existing docs.
 

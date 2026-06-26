@@ -1,6 +1,6 @@
 ---
 name: lean-epic
-description: Manage long-running project work through a .lean/<epic>/ folder with a durable north-star.md, operational state.md, supporting specs, and small iteration plans. Use when the user wants an agent to shape an epic, maintain the north star, plan or implement the next iteration, keep progress aligned, and commit/push completed slices.
+description: Manage long-running project work through a .lean epic folder with a durable north-star.md, operational state.md, supporting specs, and small iteration plans. Use when the user wants an agent to shape an epic, maintain the north star, plan or implement the next iteration, keep progress aligned, and commit/push completed slices.
 ---
 
 # Lean Epic
@@ -23,7 +23,7 @@ Default to `.lean/<epic-slug>/` unless the user gives another path.
 - `north-star.md`: durable product goal, architecture direction, accepted decisions, non-goals, and completion checklist.
 - `state.md`: current status, active iteration, verification evidence, commit/push evidence, and next gap.
 - `specs/`: durable supporting specs for the epic.
-- `iterations/iteration-N.md`: one small milestone with scope, acceptance criteria, verification, and remaining gaps.
+- `iterations/iteration-N.md`: one small milestone expressed only as required, specific outcomes.
 
 Keep progress out of the north star. Put progress in `state.md` and iteration files.
 
@@ -62,22 +62,21 @@ Ask before creating files when the target path or naming is uncertain.
 
 Each iteration should be the smallest coherent milestone that moves toward the north star, preferably a vertical slice with visible verification.
 
+Iteration files must be concise. Write only a list of required outcomes. Do not include background, rationale, optional work, stretch goals, nice-to-haves, alternatives, open questions, or prose explaining how to use the plan.
+
+Every outcome must be 100% specific: name the exact artifact, behavior, command, test, document, commit, or evidence required. Avoid vague categories such as "improve", "handle", "support", "as needed", "if possible", "consider", "may", "could", "optional", "ideally", or "where appropriate".
+
+There is no optional language in an iteration file under any circumstance. If an item is not required for the iteration to close, omit it. If the item is required only under a condition, either make the condition exact and testable or split it into a later iteration.
+
 Use this shape:
 
 ```markdown
 # Iteration N: <short title>
 
-## Current Checkpoint
-## Goal
-## Decisions
-## Implementation Work
-## Out Of Scope For This Iteration
-## Acceptance Criteria
-## Verification
-## Remaining Gaps Toward The North Star
+- <required outcome 1>
+- <required outcome 2>
+- <required outcome 3>
 ```
-
-Out-of-scope means out for this iteration only. It does not change the north star.
 
 ## Implement
 
@@ -89,12 +88,6 @@ Out-of-scope means out for this iteration only. It does not change the north sta
 6. Update the iteration plan if reality invalidates it.
 
 Do not mark an iteration complete until acceptance criteria, verification evidence, commit hash, and push evidence are recorded.
-
-## Commit And Push
-
-Completed iterations must be committed and pushed.
-
-Before committing, inspect the working tree and stage only changes belonging to the iteration. If push is blocked by credentials, network, branch protection, or missing remote, record the blocker in `state.md` and leave the iteration incomplete.
 
 ## Guardrails
 
